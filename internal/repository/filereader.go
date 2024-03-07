@@ -6,15 +6,16 @@ import (
 )
 
 type ProxiesReader struct {
+	fileName string
 }
 
-func NewProxiesReader() ProxiesReader {
-	return ProxiesReader{}
+func NewProxiesReader(fileName string) ProxiesReader {
+	return ProxiesReader{fileName: fileName}
 }
 
 func (p *ProxiesReader) ReadProxiesFromFile() ([]string, error) {
 	var res []string
-	file, err := os.Open("socks5_proxies.txt")
+	file, err := os.Open(p.fileName)
 	if err != nil {
 		return res, err
 	}

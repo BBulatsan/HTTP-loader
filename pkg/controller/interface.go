@@ -1,6 +1,8 @@
 package controller
 
 type Controller interface {
-	LoadTCP(proxyTarget, target string) error
-	LoadHTTP(proxyTarget, target string) error
+	LoadTCPWithProxy(proxyTarget, target string) error
+	LoadTCP(target string) error
+	LoadHTTPWithProxy(proxyTarget, target string) error
+	LoadHTTP(target string) error
 }

@@ -1,5 +1,5 @@
 package repository
 
 type ReadProxies interface {
-	ReadProxiesFromFile()
+	ReadProxiesFromFile() ([]string, error)
 }

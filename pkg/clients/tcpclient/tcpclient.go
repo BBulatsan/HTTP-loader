@@ -25,3 +25,17 @@ func NewTCPClientWithProxy(proxyTarget, target string) (net.Conn, error) {
 
 	return conn, nil
 }
+
+func NewTCPClient(target string) (net.Conn, error) {
+	conn, err := net.Dial("tcp", target)
+	if err != nil {
+		return nil, err
+	}
+
+	err = conn.SetDeadline(time.Now().Add(60 * time.Second))
+	if err != nil {
+		return nil, err
+	}
+
+	return conn, nil
+}

@@ -15,9 +15,21 @@ func NewHTTPClientWithProxy(proxyTarget string) (*http.Client, error) {
 
 	tr := &http.Transport{
 		Dial:               dialer.Dial,
-		MaxIdleConns:       10,
+		MaxIdleConns:       0,
 		IdleConnTimeout:    60 * time.Second,
 		DisableCompression: true,
+		DisableKeepAlives:  false,
+	}
+
+	return &http.Client{Transport: tr, Timeout: 60 * time.Second}, nil
+}
+
+func NewHTTPClient() (*http.Client, error) {
+	tr := &http.Transport{
+		MaxIdleConns:       0,
+		IdleConnTimeout:    60 * time.Second,
+		DisableCompression: true,
+		DisableKeepAlives:  false,
 	}
 
 	return &http.Client{Transport: tr, Timeout: 60 * time.Second}, nil
